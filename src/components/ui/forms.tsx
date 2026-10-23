@@ -142,7 +142,7 @@ export function OtpInput({
             if (i < length - 1) refs.current[i + 1]?.focus();
           }}
           className={cn(
-            "h-14 min-w-0 flex-1 rounded-[14px] border-[1.5px] bg-surface text-center font-display text-[18px] font-bold text-ink-900 outline-none transition-colors",
+            "h-14 min-w-0 flex-1 rounded-[14px] border-[1.5px] bg-surface text-center font-display text-[16px] font-bold text-ink-900 outline-none transition-colors",
             error ? "border-err-icon" : v ? "border-ink-500" : "border-line-strong",
           )}
         />
@@ -169,7 +169,7 @@ export function SearchBar({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="h-11 w-full rounded-2xl border border-line bg-surface py-2 pl-10 pr-3 text-[14px] outline-none placeholder:text-ink-300 focus:border-ink-500"
+        className="h-11 w-full rounded-2xl border border-line bg-surface py-2 pl-10 pr-3 text-[12px] outline-none placeholder:text-ink-300 focus:border-ink-500"
       />
     </div>
   );

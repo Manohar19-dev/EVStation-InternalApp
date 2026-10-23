@@ -62,13 +62,13 @@ export default function EmployeeHomePage() {
 
       {/* Hero */}
       <div className="overflow-hidden rounded-[24px] bg-gradient-to-br from-primary-900 to-primary-700 p-5 text-white shadow-md">
-        <div className="text-[13px] text-white/70">
+        <div className="text-[12px] text-white/70">
           {station?.shortName} · {me?.shiftPattern}
         </div>
-        <div className="mt-2 font-display text-[24px] font-bold leading-tight">
+        <div className="mt-2 font-display text-[20px] font-bold leading-tight">
           {checkedIn ? "You're checked in" : "Not checked in yet"}
         </div>
-        <p className="mt-1 text-[14px] text-white/80">
+        <p className="mt-1 text-[12px] text-white/80">
           {checkedIn
             ? `Since ${todayAtt?.checkInAt ? new Date(todayAtt.checkInAt).toLocaleTimeString("en-IN", { hour: "numeric", minute: "2-digit" }) : "—"}`
             : "Geo-fence + selfie required"}
@@ -82,7 +82,7 @@ export default function EmployeeHomePage() {
 
       {/* Quick actions */}
       <section>
-        <h2 className="mb-3 font-display text-[15px] font-bold uppercase tracking-[0.06em] text-ink-500">Quick actions</h2>
+        <h2 className="mb-3 font-display text-[13px] font-bold uppercase tracking-[0.06em] text-ink-500">Quick actions</h2>
         <div className="grid grid-cols-2 gap-3">
           {actions.map((a) => (
             <Link
@@ -108,7 +108,7 @@ export default function EmployeeHomePage() {
           </Link>
         </div>
         <div className="mt-2 flex items-end justify-between">
-          <div className="font-display text-[28px] font-bold num">{checklist?.completedPercent ?? 0}%</div>
+          <div className="font-display text-[24px] font-bold num">{checklist?.completedPercent ?? 0}%</div>
           <StatusBadge status={checklist?.status === "completed" ? "completed" : "in_progress"} />
         </div>
         <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-surface-muted">
@@ -119,7 +119,7 @@ export default function EmployeeHomePage() {
       {/* Tasks */}
       <section>
         <div className="mb-2 flex items-center justify-between">
-          <h2 className="font-display text-[15px] font-bold uppercase tracking-[0.06em] text-ink-500">My tasks</h2>
+          <h2 className="font-display text-[13px] font-bold uppercase tracking-[0.06em] text-ink-500">My tasks</h2>
           <Link href="/app/tasks" className="t-caption text-primary-700">
             See all
           </Link>
@@ -143,7 +143,7 @@ export default function EmployeeHomePage() {
 
       <section>
         <div className="mb-2 flex items-center justify-between">
-          <h2 className="font-display text-[15px] font-bold uppercase tracking-[0.06em] text-ink-500">Maintenance</h2>
+          <h2 className="font-display text-[13px] font-bold uppercase tracking-[0.06em] text-ink-500">Maintenance</h2>
           <Link href="/app/maintenance" className="t-caption text-primary-700">
             All
           </Link>
@@ -165,7 +165,7 @@ export default function EmployeeHomePage() {
 
       <section>
         <div className="mb-2 flex items-center justify-between">
-          <h2 className="font-display text-[15px] font-bold uppercase tracking-[0.06em] text-ink-500">My requests</h2>
+          <h2 className="font-display text-[13px] font-bold uppercase tracking-[0.06em] text-ink-500">My requests</h2>
           <Link href="/app/requests" className="t-caption text-primary-700">
             All
           </Link>
@@ -190,7 +190,7 @@ export default function EmployeeHomePage() {
 
       <section>
         <div className="mb-2 flex items-center justify-between">
-          <h2 className="font-display text-[15px] font-bold uppercase tracking-[0.06em] text-ink-500">Alerts</h2>
+          <h2 className="font-display text-[13px] font-bold uppercase tracking-[0.06em] text-ink-500">Alerts</h2>
           <Link href="/app/notifications" className="t-caption text-primary-700">
             All
           </Link>

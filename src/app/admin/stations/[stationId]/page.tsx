@@ -37,7 +37,7 @@ export default function StationDetailPage() {
         <span className="t-caption text-ink-500">{CLUSTER_LABELS[s.cluster]}</span>
       </div>
       <div>
-        <h1 className="font-display text-[24px] font-bold leading-tight text-ink-900">{s.shortName}</h1>
+        <h1 className="font-display text-[20px] font-bold leading-tight text-ink-900">{s.shortName}</h1>
         <p className="mt-1 t-body text-ink-500">{s.address}</p>
       </div>
 
@@ -116,7 +116,7 @@ function Stat({ label, value, hint }: { label: string; value: string; hint?: str
   return (
     <div className="rounded-2xl border border-line bg-surface p-3.5">
       <div className="t-caption text-ink-500">{label}</div>
-      <div className="mt-0.5 font-display text-[18px] font-bold num">{value}</div>
+      <div className="mt-0.5 font-display text-[16px] font-bold num">{value}</div>
       {hint ? <div className="t-caption text-ink-300">{hint}</div> : null}
     </div>
   );

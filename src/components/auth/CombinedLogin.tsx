@@ -129,7 +129,7 @@ export function CombinedLogin({ initialRole = "admin" }: { initialRole?: Prototy
           <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-[18px] bg-primary-700 text-white shadow-md">
             <Leaf className="h-7 w-7" />
           </div>
-          <h1 className="font-display text-[28px] font-extrabold tracking-tight text-primary-900">EV Network</h1>
+          <h1 className="font-display text-[24px] font-extrabold tracking-tight text-primary-900">EV Network</h1>
           <p className="mt-1 t-body text-ink-500">Internal Operations Platform</p>
         </div>
 
@@ -179,7 +179,7 @@ export function CombinedLogin({ initialRole = "admin" }: { initialRole?: Prototy
             {isAdmin ? <Shield className="h-5 w-5" /> : <Smartphone className="h-5 w-5" />}
           </div>
           <div className="min-w-0">
-            <div className="font-display text-[17px] font-bold leading-tight text-ink-900">
+            <div className="font-display text-[15px] font-bold leading-tight text-ink-900">
               {isAdmin ? "Login as Admin" : "Login as Employee"}
             </div>
             <div className="mt-0.5 t-caption text-ink-500">
@@ -299,10 +299,10 @@ export function CombinedLogin({ initialRole = "admin" }: { initialRole?: Prototy
 
           {step === "bound" ? (
             <div className="py-8 text-center">
-              <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-ok-bg text-ok-fg font-display text-[28px] font-bold">
+              <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-ok-bg text-ok-fg font-display text-[24px] font-bold">
                 ✓
               </div>
-              <div className="font-display text-[20px] font-bold">Device bound</div>
+              <div className="font-display text-[17px] font-bold">Device bound</div>
               <p className="mt-1 t-body text-ink-500">Signing you in…</p>
             </div>
           ) : null}

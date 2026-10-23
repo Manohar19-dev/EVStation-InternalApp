@@ -94,7 +94,7 @@ export function EmployeeShell({ children }: { children: React.ReactNode }) {
                     className={cn("flex w-[18%] flex-col items-center gap-0.5 py-1.5", active ? "text-primary-700" : "text-ink-500")}
                   >
                     <Icon className="h-5 w-5" strokeWidth={active ? 2.2 : 1.75} />
-                    <span className="text-[11px] font-medium">{item.label}</span>
+                    <span className="text-[10px] font-medium">{item.label}</span>
                   </Link>
                 );
               })}
@@ -121,7 +121,7 @@ export function EmployeeShell({ children }: { children: React.ReactNode }) {
                     className={cn("flex w-[18%] flex-col items-center gap-0.5 py-1.5", active ? "text-primary-700" : "text-ink-500")}
                   >
                     <Icon className="h-5 w-5" strokeWidth={active ? 2.2 : 1.75} />
-                    <span className="text-[11px] font-medium">{item.label}</span>
+                    <span className="text-[10px] font-medium">{item.label}</span>
                   </Link>
                 );
               })}
@@ -135,7 +135,7 @@ export function EmployeeShell({ children }: { children: React.ReactNode }) {
             <button type="button" className="absolute inset-0 bg-[rgba(20,32,25,0.4)]" aria-label="Close" onClick={() => setQuickOpen(false)} />
             <div className="relative z-10 rounded-t-[28px] bg-surface px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3 shadow-sheet">
               <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-line-strong" />
-              <div className="mb-3 font-display text-[18px] font-bold">Quick actions</div>
+              <div className="mb-3 font-display text-[16px] font-bold">Quick actions</div>
               <div className="grid grid-cols-2 gap-3">
                 {[
                   { href: "/app/attendance", label: "Check in", icon: LogIn, tint: "bg-primary-50 text-primary-700" },
@@ -185,7 +185,7 @@ export function EmployeeShell({ children }: { children: React.ReactNode }) {
                   <Leaf className="h-5 w-5" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <div className="truncate font-display text-[16px] font-bold text-primary-900">{me?.name ?? "Employee"}</div>
+                  <div className="truncate font-display text-[14px] font-bold text-primary-900">{me?.name ?? "Employee"}</div>
                   <div className="t-caption text-ink-500">Field operations</div>
                 </div>
                 <button type="button" aria-label="Close" onClick={() => setDrawerOpen(false)} className="rounded-full p-2">

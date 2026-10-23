@@ -47,7 +47,7 @@ export function MobileHeader({
       )}
 
       <div className="min-w-0 flex-1 text-center">
-        <div className="truncate font-display text-[17px] font-bold tracking-tight text-ink-900">{title}</div>
+        <div className="truncate font-display text-[15px] font-bold tracking-tight text-ink-900">{title}</div>
         {subtitle ? <div className="truncate t-caption text-ink-500">{subtitle}</div> : null}
       </div>
 

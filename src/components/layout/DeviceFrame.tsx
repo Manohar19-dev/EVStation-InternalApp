@@ -10,7 +10,7 @@ function StatusBarMock() {
         className="pointer-events-none absolute inset-x-0 top-0 z-[60] hidden h-11 items-center justify-between px-8 text-ink-900 md:flex"
         aria-hidden="true"
       >
-        <span className="font-display text-[15px] font-bold">9:41</span>
+        <span className="font-display text-[13px] font-bold">9:41</span>
         <span className="flex items-center gap-1.5 text-ink-900">
           <SignalHigh size={16} strokeWidth={2.2} />
           <Wifi size={16} strokeWidth={2.2} />

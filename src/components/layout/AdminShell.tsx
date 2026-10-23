@@ -105,9 +105,9 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
                     )}
                   >
                     <Icon className="h-5 w-5" strokeWidth={active ? 2.2 : 1.75} />
-                    <span className="truncate text-[11px] font-medium">{item.label}</span>
+                    <span className="truncate text-[10px] font-medium">{item.label}</span>
                     {count > 0 ? (
-                      <span className="absolute right-[18%] top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary-700 px-1 text-[10px] font-semibold text-white">
+                      <span className="absolute right-[18%] top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary-700 px-1 text-[9px] font-semibold text-white">
                         {count > 9 ? "9+" : count}
                       </span>
                     ) : null}
@@ -128,7 +128,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
                   <Leaf className="h-5 w-5" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <div className="font-display text-[16px] font-bold text-primary-900">EV Network</div>
+                  <div className="font-display text-[14px] font-bold text-primary-900">EV Network</div>
                   <div className="t-caption text-ink-500">Rajesh Varma · Owner</div>
                 </div>
                 <button type="button" aria-label="Close menu" onClick={() => setDrawerOpen(false)} className="rounded-full p-2 hover:bg-surface-muted">
@@ -155,7 +155,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
                         <Icon className="h-5 w-5" strokeWidth={1.75} />
                         <span className="flex-1">{item.label}</span>
                         {count > 0 ? (
-                          <span className="rounded-full bg-primary-700 px-2 py-0.5 text-[11px] font-semibold text-white">{count}</span>
+                          <span className="rounded-full bg-primary-700 px-2 py-0.5 text-[10px] font-semibold text-white">{count}</span>
                         ) : null}
                       </Link>
                     );

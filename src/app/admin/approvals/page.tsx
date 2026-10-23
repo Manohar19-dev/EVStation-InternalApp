@@ -169,7 +169,7 @@ function ApprovalsInner() {
                     </div>
                     <div className="mt-1 t-caption text-ink-500">{REQUEST_TYPE_LABELS[r.type as RequestType]}</div>
                     <div className="mt-3 flex items-center justify-between">
-                      <MoneyText amount={r.amount} className="text-[17px]" />
+                      <MoneyText amount={r.amount} className="text-[15px]" />
                       <span className={`t-caption ${agedItem || demo.agedApprovals ? "font-semibold text-warn-fg" : "text-ink-500"}`}>
                         {relativeAge(r.createdAt)}
                         <ChevronRight className="ml-1 inline h-4 w-4 text-ink-300" />
@@ -191,7 +191,7 @@ function ApprovalsInner() {
                 <StatusBadge status={selected.status} />
                 <span className="t-caption text-ink-500">{selected.id}</span>
               </div>
-              <h3 className="mt-2 font-display text-[22px] font-bold">{selected.title}</h3>
+              <h3 className="mt-2 font-display text-[18px] font-bold">{selected.title}</h3>
               <p className="mt-1 t-body text-ink-500">{selected.description}</p>
             </div>
 

@@ -22,7 +22,7 @@ export default function MorePage() {
       <Card className="flex items-center gap-3 rounded-2xl p-4">
         <Avatar initials={me?.avatarInitials ?? "??"} size={56} />
         <div>
-          <div className="font-display text-[18px] font-bold">{me?.name}</div>
+          <div className="font-display text-[16px] font-bold">{me?.name}</div>
           <div className="t-caption text-ink-500">{me ? JOB_ROLE_SHORT[me.jobRole] : ""}</div>
         </div>
       </Card>

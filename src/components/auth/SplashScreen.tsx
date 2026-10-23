@@ -53,7 +53,7 @@ export function SplashScreen() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.28, duration: 0.45 }}
           >
-            <h1 className="font-display text-[34px] font-extrabold tracking-tight text-primary-900">EV Network</h1>
+            <h1 className="font-display text-[28px] font-extrabold tracking-tight text-primary-900">EV Network</h1>
             <p className="mt-1.5 t-body text-ink-500">Internal Operations Platform</p>
           </motion.div>
         </motion.div>

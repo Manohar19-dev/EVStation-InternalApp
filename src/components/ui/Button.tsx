@@ -15,9 +15,9 @@ const variants: Record<ButtonVariant, string> = {
 };
 
 const sizes: Record<ButtonSize, string> = {
-  lg: "h-14 px-6 text-[16px] rounded-[16px]",
-  md: "h-12 px-5 text-[15px] rounded-[14px]",
-  sm: "h-9 px-3.5 text-[14px] rounded-[12px]",
+  lg: "h-14 px-6 text-[14px] rounded-[16px]",
+  md: "h-12 px-5 text-[13px] rounded-[14px]",
+  sm: "h-9 px-3.5 text-[12px] rounded-[12px]",
 };
 
 export const Spinner = ({ size = 18, className }: { size?: number; className?: string }) => (

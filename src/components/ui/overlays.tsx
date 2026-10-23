@@ -67,7 +67,7 @@ export function Modal({
           >
             <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-line-strong" />
             <div className="mb-4 flex items-start justify-between gap-3">
-              {title ? <h2 className="font-display text-[20px] font-bold text-ink-900">{title}</h2> : <span />}
+              {title ? <h2 className="font-display text-[17px] font-bold text-ink-900">{title}</h2> : <span />}
               <button type="button" aria-label="Close dialog" onClick={onClose} className="rounded-full p-1.5 text-ink-500 hover:bg-surface-muted">
                 <X className="h-5 w-5" />
               </button>
@@ -123,7 +123,7 @@ export function Drawer({
             className="relative z-10 mt-10 flex min-h-0 flex-1 flex-col overflow-hidden rounded-t-[28px] bg-surface shadow-sheet"
           >
             <div className="flex shrink-0 items-center justify-between border-b border-line px-5 py-4">
-              <h2 className="font-display text-[18px] font-bold text-ink-900">{title}</h2>
+              <h2 className="font-display text-[16px] font-bold text-ink-900">{title}</h2>
               <button type="button" aria-label="Close" onClick={onClose} className="rounded-full p-1.5 text-ink-500 hover:bg-surface-muted">
                 <X className="h-5 w-5" />
               </button>

@@ -20,11 +20,11 @@ export default function AdminMorePage() {
   return (
     <div className="space-y-4 pb-2">
       <Card className="flex items-center gap-3 rounded-2xl p-4">
-        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary-100 font-display text-[18px] font-bold text-primary-800">
+        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary-100 font-display text-[16px] font-bold text-primary-800">
           RV
         </div>
         <div>
-          <div className="font-display text-[18px] font-bold">Rajesh Varma</div>
+          <div className="font-display text-[16px] font-bold">Rajesh Varma</div>
           <div className="t-caption text-ink-500">Owner / Super Admin</div>
         </div>
       </Card>
@@ -45,7 +45,7 @@ export default function AdminMorePage() {
               </div>
               <span className="flex-1 t-label text-ink-900">{item.label}</span>
               {count > 0 ? (
-                <span className="rounded-full bg-primary-700 px-2 py-0.5 text-[11px] font-semibold text-white">{count}</span>
+                <span className="rounded-full bg-primary-700 px-2 py-0.5 text-[10px] font-semibold text-white">{count}</span>
               ) : null}
             </Link>
           );
