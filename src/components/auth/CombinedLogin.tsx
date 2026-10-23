@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Leaf, Shield, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { TextField } from "@/components/ui/forms";
+import { OtpInput, TextField } from "@/components/ui/forms";
+import { useToast } from "@/components/ui/overlays";
 import { useAppStore, useHydrated } from "@/store/useAppStore";
 import { timings } from "@/lib/sim/timings";
 import type { PrototypeRole } from "@/types";
@@ -12,16 +13,25 @@ import { DeviceFrame } from "@/components/layout/DeviceFrame";
 import { PresenterPanel } from "@/components/demo/PresenterPanel";
 import { cn } from "@/lib/cn";
 
+function formatPhone(phone: string) {
+  const d = phone.replace(/\D/g, "").slice(0, 10);
+  if (d.length <= 5) return d;
+  return `${d.slice(0, 5)} ${d.slice(5)}`;
+}
+
 export function CombinedLogin({ initialRole = "admin" }: { initialRole?: PrototypeRole }) {
   const router = useRouter();
   const hydrated = useHydrated();
   const session = useAppStore((s) => s.session);
   const login = useAppStore((s) => s.login);
+  const { toast } = useToast();
 
   const [role, setRole] = useState<PrototypeRole>(initialRole);
   const [step, setStep] = useState<"phone" | "otp" | "pin" | "bound">("phone");
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
+  const [otpKey, setOtpKey] = useState(0);
+  const [resendIn, setResendIn] = useState(0);
   const [pin, setPin] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -31,12 +41,20 @@ export function CombinedLogin({ initialRole = "admin" }: { initialRole?: Prototy
     router.replace(session.role === "admin" ? "/admin" : "/app");
   }, [hydrated, session, router]);
 
+  useEffect(() => {
+    if (step !== "otp" || resendIn <= 0) return;
+    const id = setTimeout(() => setResendIn((s) => s - 1), 1000);
+    return () => clearTimeout(id);
+  }, [step, resendIn]);
+
   const switchRole = (next: PrototypeRole) => {
     if (next === role) return;
     setRole(next);
     setStep("phone");
     setPhone("");
     setOtp("");
+    setOtpKey((k) => k + 1);
+    setResendIn(0);
     setPin("");
     setError("");
     setLoading(false);
@@ -52,14 +70,19 @@ export function CombinedLogin({ initialRole = "admin" }: { initialRole?: Prototy
     await new Promise((r) => setTimeout(r, timings.otpSend));
     setLoading(false);
     setStep("otp");
+    setResendIn(24);
+    setOtp("");
+    setOtpKey((k) => k + 1);
   };
 
-  const verifyOtp = async () => {
-    if (otp === "000000") {
+  const verifyOtp = async (code = otp) => {
+    if (code === "000000") {
       setError("Incorrect OTP. Try again.");
+      setOtp("");
+      setOtpKey((k) => k + 1);
       return;
     }
-    if (otp.length !== 6) {
+    if (code.length !== 6) {
       setError("Enter the 6-digit OTP.");
       return;
     }
@@ -199,30 +222,60 @@ export function CombinedLogin({ initialRole = "admin" }: { initialRole?: Prototy
 
           {step === "otp" ? (
             <>
-              <TextField
-                label="Enter OTP"
-                value={otp}
-                onChange={(e) => setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))}
-                inputMode="numeric"
-                maxLength={6}
-                autoComplete="one-time-code"
-                hint="Demo: any 6 digits except 000000"
-                error={error || undefined}
-              />
-              <Button fullWidth loading={loading} onClick={verifyOtp}>
+              <div className="space-y-2">
+                <span className="t-label text-ink-700">Enter OTP</span>
+                <p className="t-caption text-ink-500">
+                  Code sent to <span className="font-semibold text-ink-900">+91 {formatPhone(phone)}</span>
+                </p>
+                <div key={otpKey}>
+                  <OtpInput
+                    onChange={setOtp}
+                    onComplete={(code) => void verifyOtp(code)}
+                    error={Boolean(error)}
+                    disabled={loading}
+                  />
+                </div>
+                {error ? (
+                  <span className="t-caption text-err-fg">{error}</span>
+                ) : (
+                  <span className="t-caption text-ink-500">Demo: any 6 digits except 000000</span>
+                )}
+              </div>
+              <Button fullWidth loading={loading} onClick={() => void verifyOtp()} disabled={otp.length !== 6}>
                 Verify OTP
               </Button>
-              <button
-                type="button"
-                className="w-full t-caption text-primary-700"
-                onClick={() => {
-                  setStep("phone");
-                  setOtp("");
-                  setError("");
-                }}
-              >
-                Change mobile number
-              </button>
+              <div className="flex items-center justify-between">
+                {resendIn > 0 ? (
+                  <span className="t-caption text-ink-500">Resend in 0:{String(resendIn).padStart(2, "0")}</span>
+                ) : (
+                  <button
+                    type="button"
+                    className="t-label min-h-[44px] text-primary-700"
+                    onClick={() => {
+                      setResendIn(24);
+                      setOtp("");
+                      setOtpKey((k) => k + 1);
+                      setError("");
+                      toast("Code resent", "success");
+                    }}
+                  >
+                    Resend code
+                  </button>
+                )}
+                <button
+                  type="button"
+                  className="t-label min-h-[44px] text-primary-700"
+                  onClick={() => {
+                    setStep("phone");
+                    setOtp("");
+                    setOtpKey((k) => k + 1);
+                    setResendIn(0);
+                    setError("");
+                  }}
+                >
+                  Change number
+                </button>
+              </div>
             </>
           ) : null}
 

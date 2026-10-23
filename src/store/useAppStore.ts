@@ -553,7 +553,8 @@ export const useAppStore = create<Store>()(
 export function useHydrated() {
   const [hydrated, setHydrated] = useState(false);
   useEffect(() => {
-    setHydrated(true);
+    setHydrated(useAppStore.persist.hasHydrated());
+    return useAppStore.persist.onFinishHydration(() => setHydrated(true));
   }, []);
   return hydrated;
 }

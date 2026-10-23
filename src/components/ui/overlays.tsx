@@ -264,13 +264,21 @@ export function ToastProvider({ children }: { children: ReactNode }) {
 }
 
 function ToastHost({ items }: { items: ToastItem[] }) {
-  const [node, setNode] = useState<HTMLElement | null>(null);
-  useEffect(() => {
-    setNode(document.getElementById("overlay-root"));
-  }, [items.length]);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
+  // Avoid SSR/client HTML mismatch: render nothing until after mount, and skip empty hosts.
+  if (!mounted || items.length === 0) return null;
+
+  const node = document.getElementById("overlay-root");
   const content = (
-    <div className="pointer-events-none absolute inset-x-3 bottom-24 z-[90] flex flex-col gap-2">
+    <div
+      className={cn(
+        "pointer-events-none z-[90] flex flex-col gap-2",
+        node ? "absolute inset-x-3 bottom-24" : "fixed inset-x-3 bottom-24 md:left-1/2 md:w-[360px] md:-translate-x-1/2",
+      )}
+      aria-live="polite"
+    >
       <AnimatePresence>
         {items.map((t) => (
           <motion.div
@@ -292,24 +300,7 @@ function ToastHost({ items }: { items: ToastItem[] }) {
     </div>
   );
 
-  if (node) return createPortal(content, node);
-  return (
-    <div className="pointer-events-none fixed inset-x-3 bottom-24 z-[90] flex flex-col gap-2 md:left-1/2 md:w-[360px] md:-translate-x-1/2">
-      {items.map((t) => (
-        <div
-          key={t.id}
-          className={cn(
-            "rounded-2xl border px-4 py-3 t-label shadow-md",
-            t.tone === "success" && "border-ok-bg bg-ok-bg text-ok-fg",
-            t.tone === "error" && "border-err-bg bg-err-bg text-err-fg",
-            t.tone === "info" && "border-line bg-surface text-ink-900",
-          )}
-        >
-          {t.message}
-        </div>
-      ))}
-    </div>
-  );
+  return createPortal(content, node ?? document.body);
 }
 
 export function useToast() {

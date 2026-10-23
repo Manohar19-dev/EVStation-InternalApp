@@ -1,6 +1,15 @@
 "use client";
 
-import type { InputHTMLAttributes, ReactNode, SelectHTMLAttributes, TextareaHTMLAttributes } from "react";
+import {
+  useRef,
+  useState,
+  type ClipboardEvent,
+  type InputHTMLAttributes,
+  type KeyboardEvent,
+  type ReactNode,
+  type SelectHTMLAttributes,
+  type TextareaHTMLAttributes,
+} from "react";
 import { Search } from "lucide-react";
 import { cn } from "@/lib/cn";
 
@@ -58,6 +67,87 @@ export function SelectField({
         {children}
       </select>
     </label>
+  );
+}
+
+export function OtpInput({
+  length = 6,
+  onComplete,
+  error,
+  disabled,
+  onChange,
+}: {
+  length?: number;
+  onComplete: (code: string) => void;
+  error?: boolean;
+  disabled?: boolean;
+  onChange?: (code: string) => void;
+}) {
+  const [vals, setVals] = useState<string[]>(Array(length).fill(""));
+  const refs = useRef<(HTMLInputElement | null)[]>([]);
+
+  const commit = (next: string[]) => {
+    setVals(next);
+    const code = next.join("");
+    onChange?.(code);
+    if (code.length === length && next.every(Boolean)) onComplete(code);
+  };
+  const setAt = (i: number, ch: string) => {
+    const next = [...vals];
+    next[i] = ch;
+    commit(next);
+  };
+  const onKey = (i: number, e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Backspace") {
+      if (vals[i]) setAt(i, "");
+      else if (i > 0) {
+        refs.current[i - 1]?.focus();
+        setAt(i - 1, "");
+      }
+    } else if (e.key === "ArrowLeft" && i > 0) refs.current[i - 1]?.focus();
+    else if (e.key === "ArrowRight" && i < length - 1) refs.current[i + 1]?.focus();
+  };
+  const onPaste = (e: ClipboardEvent<HTMLInputElement>) => {
+    const text = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, length);
+    if (!text) return;
+    e.preventDefault();
+    const next = Array(length)
+      .fill("")
+      .map((_, i) => text[i] ?? "");
+    commit(next);
+    refs.current[Math.min(text.length, length - 1)]?.focus();
+  };
+
+  return (
+    <div className={cn("flex justify-between gap-2", error && "shake")} role="group" aria-label="One-time code">
+      {vals.map((v, i) => (
+        <input
+          key={i}
+          ref={(el) => {
+            refs.current[i] = el;
+          }}
+          value={v}
+          disabled={disabled}
+          inputMode="numeric"
+          autoComplete={i === 0 ? "one-time-code" : "off"}
+          maxLength={1}
+          aria-label={`Digit ${i + 1}`}
+          autoFocus={i === 0}
+          onPaste={onPaste}
+          onKeyDown={(e) => onKey(i, e)}
+          onChange={(e) => {
+            const ch = e.target.value.replace(/\D/g, "").slice(-1);
+            if (!ch) return;
+            setAt(i, ch);
+            if (i < length - 1) refs.current[i + 1]?.focus();
+          }}
+          className={cn(
+            "h-14 min-w-0 flex-1 rounded-[14px] border-[1.5px] bg-surface text-center font-display text-[18px] font-bold text-ink-900 outline-none transition-colors",
+            error ? "border-err-icon" : v ? "border-ink-500" : "border-line-strong",
+          )}
+        />
+      ))}
+    </div>
   );
 }
 
